@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mt-2">
-    <h3 class="text">Ticket Pool</h3>
+    <h3 class="text mb-3">Ticket Pool</h3>
     <table class="table table-bordered adminResolved_data-table" id="viewtable">
         <thead>
             <tr>

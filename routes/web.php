@@ -22,9 +22,10 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'users'], 'prefix' => 'users', 'as' => 'users.'], function () {
     // Users route
-    Route::get('/dashboard', 'UserController@index')->name('dashboard');
-    Route::post('/addticket', 'UserController@store')->name('addticket');
-    Route::get('editticket/{id}', 'UserController@edit')->name('editticket');
+    Route::get('/', 'UserController@index')->name('dashboard');
+    Route::post('/dashboard', 'UserController@store');
+    Route::get('editticket/{id}', 'UserController@edit');
+    Route::post('updateticket/{id}', 'UserController@update')->name('updateticket');
 
     Route::get('pendingticket', 'UserPendingController@index')->name('usersPending');
 

@@ -4,7 +4,7 @@
 @section('content')
 <!-- Start Datatable -->
 <div class="container mt-2">
-    <h3 class="text">Archieved tickets</h3>
+    <h3 class="text mb-5">Archieved tickets</h3>
     <table id="archievedtable" class="table table-bordered archieved-table">
         <thead>
             <tr>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
                       <label for="lastname" class="col-form-label">Status</label>
-                      <input type="text" class="form-control" id="mStatus" value="Open" readonly>
+                      <input type="text" class="form-control" id="mStatus" readonly>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="col-form-label">Remarks</label>
@@ -112,7 +112,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "edit/"+view_id,
+                url: "editticket/"+view_id,
                 dataType: "json",
                 success: function (response) {
                     $('#mCreated_by').val(response.tickets.created_by),
@@ -124,6 +124,7 @@
                 }
             });
         }));
+
         $('#btnReopen').click(function (e) {
         e.preventDefault();
         var update_id = $('#view_id').val();
@@ -136,11 +137,11 @@
         }
             $.ajax({
                 type: "POST",
-                url: "update/"+update_id,
+                url: "updateticket/"+update_id,
                 data: data,
                 dataType: "json",
                 success: function (response) {
-                    
+                  
                 }
             });
             $('#ViewTicket').modal('hide');

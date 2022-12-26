@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="container mt-2">
-    <h3 class="text">Ticket Ass</h3>
+    <h3 class="text mb-3">Ticket Pool</h3>
     <table class="table table-bordered adminAssigned_data-table" id="viewtable">
         <thead>
             <tr>
@@ -137,7 +137,7 @@
                 data: data,
                 dataType: "json",
                 success: function (response) {
-                    
+
                 }
             });
             $('#ViewTicket').modal('hide');

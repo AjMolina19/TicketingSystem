@@ -5,7 +5,9 @@
 <!-- Start Datatable -->
 <div class="container mt-1">
     <h3 class="text">Create your tickets</h3>
-    <button class="btn btn-success float-right mb-3" id="btncreateTicket" name="createTicket">Create Tickets</button>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+        <button class="btn btn-success" id="btncreateTicket" name="createTicket">Create Tickets</button>
+    </div>
     <table id="viewtable" class="table table-bordered data-table">
         <thead>
             <tr>
@@ -126,13 +128,13 @@
 <script>
     $(document).ready(function() {
       
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
       
-      var table = $('.data-table').DataTable({
+        var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('users.dashboard') }}",
@@ -145,29 +147,37 @@
                 {data: 'created_at', name: 'created_at'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
-      });
+        });
   
-      $('#btncreateTicket').click(function (e) { 
-          e.preventDefault();
-          $('#CreateTicket').modal('show')
-      });
-      $('#btnAdd').click(function (e) {
-          e.preventDefault();
-          var data = {
-              'created_by' : $('#created_by').val(),
-              'importance' : $('#importance').val(),
-              'title' : $('#title').val(),
-              'status' : $('#status').val(),
-              'created_at' : $('#created_at').val(),
-          }
+        $('#btncreateTicket').click(function (e) { 
+            e.preventDefault();
+            $('#CreateTicket').modal('show')
+        });
+      
+        var user = {
+            id: {{ auth()->user()->id }},
+            name: '{{ auth()->user()->name }}'
+        };
+
+        $('#btnAdd').click(function (e) {
+            e.preventDefault();
+            var user_Id = user.id;
+            var data = {
+                'user_id' : user_Id,
+                'created_by' : $('#created_by').val(),
+                'importance' : $('#importance').val(),
+                'title' : $('#title').val(),
+                'status' : $('#status').val(),
+                'created_at' : $('#created_at').val(),
+            }
   
-          $.ajax({
-              type: "POST",
-              url: "/addticket",
-              data: data,
-              dataType: "json",
-              success: function (response) {
-                  $('#CreateTicket').modal('hide')
+            $.ajax({
+                type: "POST",
+                url: "users/dashboard",
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    $('#CreateTicket').modal('hide')
                 }
             });
         });
@@ -178,7 +188,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "edit/"+view_id,
+                url: "editticket/"+view_id,
                 dataType: "json",
                 success: function (response) {
                     $('#mCreated_by').val(response.tickets.created_by),

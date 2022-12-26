@@ -21,6 +21,6 @@ class AdminResolvedController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('admin.adminresolved');
+        return view('admin.adminResolved');
     }
 }

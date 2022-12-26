@@ -4,7 +4,7 @@
 @section('content')
 <!-- Start Datatable -->
 <div class="container mt-2">
-    <h3 class="text">Pending tickets</h3>
+    <h3 class="text mb-5">Pending tickets</h3>
     <table id="pendingtable" class="table table-bordered pending-table">
         <thead>
             <tr>

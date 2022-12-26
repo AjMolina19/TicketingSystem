@@ -4,7 +4,7 @@
 @section('content')
 <!-- Start Datatable -->
 <div class="container mt-2">
-    <h3 class="text">Resolved tickets</h3>
+    <h3 class="text mb-5">Resolved tickets</h3>
     <table id="resolvedtable" class="table table-bordered resolved-table">
         <thead>
             <tr>
@@ -87,7 +87,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "edit/"+view_id,
+                url: "editticket/"+view_id,
                 dataType: "json",
                 success: function (response) {
                     $('#mStatus').val(response.tickets.status),

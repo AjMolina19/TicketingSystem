@@ -37,6 +37,7 @@ class UserController extends Controller
             'created_at' => 'required'
         ]);
         $tickets = new Tickets();
+        $tickets->user_id = auth()->user()->id;
         $tickets->created_by = request('created_by');
         $tickets->importance = request('importance');
         $tickets->title = request('title');

@@ -1,20 +1,20 @@
 {{-- Start Tabele navigation var --}}
 <div class="container mt-5">
-    <div class="row">
-        <div class="card col-12" style="width: 60%;">
+    <div class="row justify-content-md-center">
+        <div class="card col-md-10">
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item ">
-                  <a class="nav-link " href="/users/dashboard">Open Ticket</a>
+                  <a class="{{ Request::path() === 'users' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.dashboard') }}">Open Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/users/pendingticket">Pending Ticket</a>
+                  <a class="{{ Request::path() === 'users/pendingticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersPending') }}">Pending Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/users/resolvedticket">Resolved Ticket</a>
+                  <a class="{{ Request::path() === 'users/resolvedticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersResolved') }}">Resolved Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/users/archievedticket">Archieved Ticket</a>
+                  <a class="{{ Request::path() === 'users/archievedticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersArchieved') }}">Archieved Ticket</a>
                 </li>
               </ul>
             </div>
@@ -25,3 +25,4 @@
     </div>
 </div>
 {{-- Start Tabele navigation var --}}
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
