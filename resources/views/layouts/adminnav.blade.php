@@ -14,7 +14,7 @@
                   <a class="{{ Request::path() === 'admin/adminresolved' ? 'nav-link active' : 'nav-link'}}" href="{{ route('admin.adminResolved') }}">Resolved Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="{{ Request::path() === 'admin/adminarchieved' ? 'nav-link active' : 'nav-link'}}" href="{{ route('admin.adminArchieved') }}">Archieved Ticket</a>
+                  <a class="{{ Request::path() === 'admin/adminarchived' ? 'nav-link active' : 'nav-link'}}" href="{{ route('admin.adminArchived') }}">Archieved Ticket</a>
                 </li>
               </ul>
             </div>

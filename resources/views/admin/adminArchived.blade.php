@@ -4,7 +4,7 @@
 @section('content')
 <div class="container mt-2">
     <h3 class="text mb-3">Ticket Pool</h3>
-    <table class="table table-bordered adminArchieved_data-table" id="viewtable">
+    <table class="table table-bordered adminArchived_data-table" id="viewtable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="status" class="col-form-label">Status</label>
                         <select class="form-control" id="status" name="status">
-                            <option>Archieved</option>
+                            <option>Archived</option>
                             <option>Open</option>
                         </select>
                     </div>
@@ -72,6 +72,27 @@
     </div>
 </div>
 <!-- End View Ticket Modal -->
+
+<!-- Start Validation Modal -->
+<div class="modal fade" id="ValidationMessage" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Reopen Successfully</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h6>Your ticket has been reopen successfully,</h6>
+        </div>
+        <div class="modal-footer">
+            <a href="{{ route('admin.adminOpen') }}" class="btn btn-success">Go to Dashboard</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Validation Modal -->
 @endsection
 
 @section('script')
@@ -84,10 +105,10 @@
         }
     });
     
-    var table = $('.adminArchieved_data-table').DataTable({
+    var table = $('.adminArchived_data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.adminArchieved') }}",
+        ajax: "{{ route('admin.adminArchived') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'created_by', name: 'created_by'},
@@ -138,7 +159,8 @@
                 data: data,
                 dataType: "json",
                 success: function (response) {
-                    
+                    $('#ValidationMessage').modal('show')
+                    $('#viewtable').DataTable().ajax.reload();
                 }
             });
             $('#ViewTicket').modal('hide');

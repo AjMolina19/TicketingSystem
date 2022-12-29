@@ -37,14 +37,14 @@
                 <form>
                     <div class="form-group">
                       <label for="created_by" class="col-form-label">Created By</label>
-                      <input type="text" class="form-control" id="mCreated_by" value="Client" readonly>
+                      <input type="text" class="form-control" id="mCreated_by" readonly>
                     </div>
                     <div class="form-group">
                       <label for="sel1">Importance:</label>
                       <select class="form-control" id="mImportance" name="importance" readonly>
                         <option>select one</option>
                         <option>Urgent</option>
-                        <option>Mid</option>
+                        <option>High</option>
                         <option>Low</option>
                       </select>
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="form-group">
                       <label for="lastname" class="col-form-label">Status</label>
-                      <input type="text" class="form-control" id="mStatus" value="Open" readonly>
+                      <input type="text" class="form-control" id="mStatus" readonly>
                     </div>
                     <div class="form-group">
                       <label for="lastname" class="col-form-label">Submitted at</label>

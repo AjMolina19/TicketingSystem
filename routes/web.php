@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -22,8 +21,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'users'], 'prefix' => 'users', 'as' => 'users.'], function () {
     // Users route
-    Route::get('/', 'UserController@index')->name('dashboard');
-    Route::post('/dashboard', 'UserController@store');
+    Route::get('/dashboard', 'UserController@index')->name('dashboard');
+    Route::post('dashboard/', 'UserController@store');
     Route::get('editticket/{id}', 'UserController@edit');
     Route::post('updateticket/{id}', 'UserController@update')->name('updateticket');
 
@@ -31,10 +30,8 @@ Route::group(['middleware' => ['auth', 'users'], 'prefix' => 'users', 'as' => 'u
 
     Route::get('resolvedticket', 'UserResolvedController@index')->name('usersResolved');
 
-    Route::get('archievedticket', 'UserArchievedController@index')->name('usersArchieved');
-    
+    Route::get('archivedticket', 'UserArchivedController@index')->name('usersArchived');
 });
-
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin','as' => 'admin.'], function(){
     //Admin routes
     Route::get('/adminopen', 'AdminHomeController@index')->name('adminOpen');
@@ -45,7 +42,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'admin','as' => 'ad
 
     Route::get('/adminresolved', 'AdminResolvedController@index')->name('adminResolved');
 
-    Route::get('/adminarchieved', 'AdminArchievedController@index')->name('adminArchieved');
+    Route::get('/adminarchived', 'AdminArchivedController@index')->name('adminArchived');
 });
 
 

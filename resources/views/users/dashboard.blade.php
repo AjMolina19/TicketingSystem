@@ -40,7 +40,7 @@
             <form>
                 <div class="form-group">
                   <label for="created_by" class="col-form-label">Created By</label>
-                  <input type="text" class="form-control" id="created_by" value="Client" disabled>
+                  <input type="text" class="form-control" id="created_by" value="{{ auth()->user()->role }}" readonly>
                 </div>
                 <div class="form-group">
                   <label for="sel1">Importance:</label>
@@ -52,15 +52,15 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="lastname" class="col-form-label">Title</label>
+                  <label for="title" class="col-form-label">Title</label>
                   <input type="text" class="form-control" id="title">
                 </div>
                 <div class="form-group">
-                  <label for="lastname" class="col-form-label">Status</label>
-                  <input type="text" class="form-control" id="status" value="Open" disabled>
+                  <label for="status" class="col-form-label">Status</label>
+                  <input type="text" class="form-control" id="status" value="Open" readonly>
                 </div>
                 <div class="form-group">
-                  <label for="lastname" class="col-form-label">Submitted at</label>
+                  <label for="created_at" class="col-form-label">Submitted at</label>
                   <input type="date" class="form-control" id="created_at">
                 </div>
               </form>
@@ -90,27 +90,27 @@
                 <form>
                     <div class="form-group">
                       <label for="created_by" class="col-form-label">Created By</label>
-                      <input type="text" class="form-control" id="mCreated_by" value="Client" readonly>
+                      <input type="text" class="form-control" id="mCreated_by" value="" readonly>
                     </div>
                     <div class="form-group">
-                      <label for="sel1">Importance:</label>
+                      <label for="mImportance">Importance:</label>
                       <select class="form-control" id="mImportance" name="importance" readonly>
                         <option>select one</option>
                         <option>Urgent</option>
-                        <option>Mid</option>
+                        <option>High</option>
                         <option>Low</option>
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="lastname" class="col-form-label">Title</label>
+                      <label for="mTitle" class="col-form-label">Title</label>
                       <input type="text" class="form-control" id="mTitle" readonly>
                     </div>
                     <div class="form-group">
-                      <label for="lastname" class="col-form-label">Status</label>
-                      <input type="text" class="form-control" id="mStatus" value="Open" readonly>
+                      <label for="mStatus" class="col-form-label">Status</label>
+                      <input type="text" class="form-control" id="mStatus" readonly>
                     </div>
                     <div class="form-group">
-                      <label for="lastname" class="col-form-label">Submitted at</label>
+                      <label for="mCreated_at" class="col-form-label">Submitted at</label>
                       <input type="text" class="form-control" id="mCreated_at" readonly>
                     </div>
                   </form>
@@ -149,14 +149,14 @@
             ]
         });
   
-        $('#btncreateTicket').click(function (e) { 
+        $('#btncreateTicket').click(function (e) {
             e.preventDefault();
             $('#CreateTicket').modal('show')
         });
       
         var user = {
             id: {{ auth()->user()->id }},
-            name: '{{ auth()->user()->name }}'
+            role: '{{ auth()->user()->role }}'
         };
 
         $('#btnAdd').click(function (e) {
@@ -173,11 +173,12 @@
   
             $.ajax({
                 type: "POST",
-                url: "users/dashboard",
+                url: "dashboard/",
                 data: data,
                 dataType: "json",
                 success: function (response) {
                     $('#CreateTicket').modal('hide')
+                    $('#viewtable').DataTable().ajax.reload();
                 }
             });
         });
@@ -191,11 +192,11 @@
                 url: "editticket/"+view_id,
                 dataType: "json",
                 success: function (response) {
-                    $('#mCreated_by').val(response.tickets.created_by),
-                    $('#mImportance').val(response.tickets.importance),
-                    $('#mTitle').val(response.tickets.title),
-                    $('#mStatus').val(response.tickets.status),
-                    $('#mCreated_at').val(response.tickets.created_at)
+                    $('#mCreated_by').val(response.tickets.created_by);
+                    $('#mImportance').val(response.tickets.importance);
+                    $('#mTitle').val(response.tickets.title);
+                    $('#mStatus').val(response.tickets.status);
+                    $('#mCreated_at').val(response.tickets.created_at);
                 }
             });
         }));

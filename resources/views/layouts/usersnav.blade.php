@@ -5,7 +5,7 @@
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item ">
-                  <a class="{{ Request::path() === 'users' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.dashboard') }}">Open Ticket</a>
+                  <a class="{{ Request::path() === 'users/dashboard' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.dashboard') }}">Open Ticket</a>
                 </li>
                 <li class="nav-item">
                   <a class="{{ Request::path() === 'users/pendingticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersPending') }}">Pending Ticket</a>
@@ -14,7 +14,7 @@
                   <a class="{{ Request::path() === 'users/resolvedticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersResolved') }}">Resolved Ticket</a>
                 </li>
                 <li class="nav-item">
-                  <a class="{{ Request::path() === 'users/archievedticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersArchieved') }}">Archieved Ticket</a>
+                  <a class="{{ Request::path() === 'users/archivedticket' ? 'nav-link active' : 'nav-link'}}" href="{{ route('users.usersArchived') }}">Archieved Ticket</a>
                 </li>
               </ul>
             </div>

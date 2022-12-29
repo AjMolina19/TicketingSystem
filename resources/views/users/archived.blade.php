@@ -4,8 +4,8 @@
 @section('content')
 <!-- Start Datatable -->
 <div class="container mt-2">
-    <h3 class="text mb-5">Archieved tickets</h3>
-    <table id="archievedtable" class="table table-bordered archieved-table">
+    <h3 class="text mb-5">Archived tickets</h3>
+    <table id="archivedtable" class="table table-bordered archieved-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -40,7 +40,7 @@
                 <form>
                     <div class="form-group">
                       <label for="created_by" class="col-form-label">Created By</label>
-                      <input type="text" class="form-control" id="mCreated_by" value="Client" readonly>
+                      <input type="text" class="form-control" id="mCreated_by" readonly>
                     </div>
                     <div class="form-group">
                       <label for="sel1">Importance:</label>
@@ -77,6 +77,27 @@
     </div>
   </div>
 <!-- End View Ticket Modal -->
+
+<!-- Start Validation Modal -->
+<div class="modal fade" id="ValidationMessage" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Reopen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Your ticket has been reopen successfully!</p>
+      </div>
+      <div class="modal-footer">
+          <a href="{{ route('users.dashboard') }}" class="btn btn-success">Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Validation Modal -->
 @endsection
 
 @section('script')
@@ -92,7 +113,7 @@
       var table = $('.archieved-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('users.usersArchieved') }}",
+            ajax: "{{ route('users.usersArchived') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'created_by', name: 'created_by'},
@@ -104,7 +125,7 @@
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         });
-        $('#archievedtable').on ('click', '.view', (function (e) {
+        $('#archivedtable').on ('click', '.view', (function (e) {
         e.preventDefault();
         var view_id = $(this).attr('id');
         $('#view_id').val(view_id);
@@ -141,7 +162,8 @@
                 data: data,
                 dataType: "json",
                 success: function (response) {
-                  
+                    $('#ValidationMessage').modal('show')
+                    $('#viewtable').DataTable().ajax.reload();
                 }
             });
             $('#ViewTicket').modal('hide');

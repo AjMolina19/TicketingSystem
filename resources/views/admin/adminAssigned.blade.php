@@ -51,7 +51,7 @@
                         <select class="form-control" id="status" name="status">
                             <option>Pending</option>
                             <option>Resolved</option>
-                            <option>Archieved</option>
+                            <option>Archived</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -137,7 +137,7 @@
                 data: data,
                 dataType: "json",
                 success: function (response) {
-
+                    $('#viewtable').DataTable().ajax.reload();
                 }
             });
             $('#ViewTicket').modal('hide');
